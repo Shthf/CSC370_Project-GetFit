@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class DecisionTreeRegressor {
-    //change to private later
+    //will change to private later
     public TreeNode root;
 
     public void fit(List<double[]> X, List<Double> y) {
@@ -111,7 +111,6 @@ class DecisionTreeRegressor {
 
     private SplitResult findBestSplit(List<double[]> X, List<Double> y) {
         if (X.isEmpty() || y.isEmpty()) {
-            // Handle the case when the lists are empty
             return new SplitResult(-1, 0.0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         }
         
@@ -127,7 +126,6 @@ class DecisionTreeRegressor {
         List<double[]> bestRightX = new ArrayList<>();
         List<Double> bestRightY = new ArrayList<>();
     
-        // Iterate over each feature
         for (int featureIndex = 0; featureIndex < numFeatures; featureIndex++) {
             // Sort data points based on the current feature
             List<DataPoint> sortedData = getSortedData(X, y, featureIndex);
@@ -204,20 +202,6 @@ class DecisionTreeRegressor {
         return s;
     }
 
-
-
-
-    // private List<DataPoint> getSortedData(List<double[]> X, List<Double> y, int featureIndex) {
-    //     // Helper method to sort data points based on a specific feature
-    //     List<DataPoint> dataPoints = new ArrayList<>();
-    //     for (int i = 0; i < X.size(); i++) {
-    //         dataPoints.add(new DataPoint(X.get(i), y.get(i), featureIndex));
-    //     }
-    //     dataPoints.sort(null);
-    //     return dataPoints;
-    // }
-
-
     private List<DataPoint> getSortedData(List<double[]> X, List<Double> y, int featureIndex) {
         List<DataPoint> data = new ArrayList<>();
     
@@ -233,10 +217,6 @@ class DecisionTreeRegressor {
     
         return data;
     }
-
-
-
-
 
     private static class DataPoint implements Comparable<DataPoint> {
         private final double[] x;
@@ -267,6 +247,4 @@ class DecisionTreeRegressor {
             return Double.compare(this.getValue(), other.getValue());
         }
     }
-
-
 }
