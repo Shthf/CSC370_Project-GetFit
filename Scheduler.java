@@ -1,8 +1,7 @@
 import java.util.Scanner;
-import java.io.File;
 import java.time.LocalDate;
 
-public class Scheduler extends Planner{
+public class Scheduler{
     public User printWelcomeGUI(){
         Scanner sc = new Scanner(System.in);
 
@@ -26,53 +25,49 @@ public class Scheduler extends Planner{
             System.out.println("Enter waist:");
             waist = Double.parseDouble(sc.nextLine());
 
-            if(waist <= 0){
+            if(waist < 15){
                 System.out.println("Invalid input, please enter a number greater than zero.");
             }
             
-        }while(waist <= 0);
+        }while(waist < 15); //From google search, the minimum waist size in the world is 15 in
 
         do{
             System.out.println("Enter pulse:");
             pulse = Integer.parseInt(sc.nextLine());
 
-            if(pulse <= 0){
+            if(pulse < 27){
                 System.out.println("Invalid input, please enter a number greater than zero.");
             }
             
-        }while(pulse <= 0);
+        }while(pulse < 27); //From google search, the slowest bpm in the world record is 27 bpm
 
         sc.close();
         User user = new User(weight, waist, pulse);
         return user;
     }
 
-    public void printScheduler(User u, File file_chinups, File file_Situps, File file_Jumps){
+    public void printScheduler(DiagnosticSystem d){
         System.out.println(" ---------------------------------------------");
         System.out.println("|                  Scheduler                  |");
         System.out.println(" ---------------------------------------------");
         System.out.println("Below is your planner for the next week:");
 
-        DiagnosticSystem diagnosticSystem_Chinups = new DiagnosticSystem(u, file_chinups);
-        DiagnosticSystem diagnosticSystem_Situps = new DiagnosticSystem(u, file_Situps);
-        DiagnosticSystem diagnosticSystem_Jumps = new DiagnosticSystem(u, file_Jumps);
-
-        int prediction_Chinups = diagnosticSystem_Chinups.getPrediction();
-        int prediction_Situps = diagnosticSystem_Situps.getPrediction();
-        int prediction_Jumps = diagnosticSystem_Jumps.getPrediction();
-
-        
-    
         LocalDate currentDate = LocalDate.now();
         // current date
         for(int i = 0; i < 7; i++){
             LocalDate nextDay = currentDate.plusDays(i);
             System.out.println(nextDay);
-            System.out.println("Number of Chin-ups: " + prediction_Chinups);
-            System.out.println("Number of Sit-ups : " + prediction_Situps);
-            System.out.println("Number of Jumps   : " + prediction_Jumps);
+            System.out.println("Number of Chin-ups: " + d.getPrediction_chinups());
+            System.out.println("Number of Sit-ups : " + d.getPrediction_Situps());
+            System.out.println("Number of Jumps   : " + d.getPrediction_Jumps());
             System.out.println(" ---------------------------------------------");
         }
+
+        // System.out.println("Testing Report:");
+        // System.out.println("Report For Chinups: MSE = " + d.getMSE(0));
+        // System.out.println("Report For Situps:  MSE = " + d.getMSE(1));
+        // System.out.println("Report For Jumps:   MSE = " + d.getMSE(2));
         
+        // System.out.println(" ---------------------------------------------");   
     }
 }
