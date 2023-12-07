@@ -1,59 +1,62 @@
-class TreeNode {
-    //private boolean isLeaf;
+public class TreeNode {
+
     private double prediction;
     private int splitFeatureIndex;
     private double splitValue;
-    private TreeNode left;
-    private TreeNode right;
+    private TreeNode leftChild;
+    private TreeNode rightChild;
 
-    public TreeNode(){}
-
-    //public TreeNode(){}
-    
-    // Setter methods
-    public void setPrediction(double prediction) {
-        this.prediction = prediction;
+    public TreeNode() {
+        this.prediction = 0.0;
+        this.splitFeatureIndex = -1;
+        this.splitValue = 0.0;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 
-    public void setSplitFeatureIndex(int splitFeatureIndex) {
-        this.splitFeatureIndex = splitFeatureIndex;
+    // Getters and setters
+
+    public boolean isLeaf() {
+        return this.leftChild == null && this.rightChild == null;
     }
 
-    public void setSplitValue(double splitValue) {
-        this.splitValue = splitValue;
-    }
-
-    public void setLeftChild(TreeNode leftChild) {
-        this.left = leftChild;
-    }
-
-    public void setRightChild(TreeNode rightChild) {
-        this.right = rightChild;
-    }
-
-    //Getter methods
     public double getPrediction() {
         return prediction;
+    }
+
+    public void setPrediction(double prediction) {
+        this.prediction = prediction;
     }
 
     public int getSplitFeatureIndex() {
         return splitFeatureIndex;
     }
 
+    public void setSplitFeatureIndex(int splitFeatureIndex) {
+        this.splitFeatureIndex = splitFeatureIndex;
+    }
+
     public double getSplitValue() {
         return splitValue;
     }
 
+    public void setSplitValue(double splitValue) {
+        this.splitValue = splitValue;
+    }
+
     public TreeNode getLeftChild() {
-        return left;
+        return leftChild;
+    }
+
+    public void setLeftChild(TreeNode leftChild) {
+        this.leftChild = leftChild;
     }
 
     public TreeNode getRightChild() {
-        return right;
+        return rightChild;
     }
 
-    //true if the node is leaf, false otherwise
-    public boolean isLeaf() {
-        return left == null && right == null;
+    public void setRightChild(TreeNode rightChild) {
+        this.rightChild = rightChild;
     }
 }
