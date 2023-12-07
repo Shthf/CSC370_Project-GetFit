@@ -2,44 +2,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class RandomForestRegressor {
-    private List<DecisionTreeRegressor> trees;
+public class RandomForestRegressor {
 
-    public RandomForestRegressor(int numTrees) {
-        trees = new ArrayList<>();
-        for (int i = 0; i < numTrees; i++) {
-            trees.add(new DecisionTreeRegressor());
-        }
+    public List<DecisionTreeRegressor> trees;
+    private int numTrees;
+    private Random random;
+
+    public RandomForestRegressor(int numTrees, long seed) {
+        this.numTrees = numTrees;
+        this.trees = new ArrayList<>();
+        this.random = new Random(seed);
     }
 
     public void fit(List<double[]> X, List<Double> y) {
-        for (DecisionTreeRegressor tree : trees) {
-            List<double[]> bootstrapSamples = new ArrayList<>();
-            List<Double> bootstrapLabels = new ArrayList<>();
-            int dataSize = X.size();
+        for (int i = 0; i < numTrees; i++) {
+            DecisionTreeRegressor tree = new DecisionTreeRegressor();
+            List<double[]> bootstrapX = new ArrayList<>();
+            List<Double> bootstrapY = new ArrayList<>();
 
-            // Create bootstrap samples
-            for (int i = 0; i < dataSize; i++) {
-                int randomIndex = new Random().nextInt(dataSize);
-                bootstrapSamples.add(X.get(randomIndex));
-                bootstrapLabels.add(y.get(randomIndex));
+            // Create a bootstrap sample
+            for (int j = 0; j < X.size(); j++) {
+                int randomIndex = random.nextInt(X.size());
+                bootstrapX.add(X.get(randomIndex));
+                bootstrapY.add(y.get(randomIndex));
             }
 
-            tree.fit(bootstrapSamples, bootstrapLabels);
+            // Train the tree on the bootstrap sample
+            tree.fit(bootstrapX, bootstrapY);
+            trees.add(tree);
         }
     }
 
     public double predict(double[] sample) {
-        double sum = 0.0;
+        double sumPredictions = 0.0;
+
         for (DecisionTreeRegressor tree : trees) {
-            sum += tree.predict(sample);
+            sumPredictions += tree.predict(sample);
         }
-        return sum / trees.size(); // Average prediction
+
+        return sumPredictions / numTrees;
     }
 
     public void printForest(){
-        for(int i = 0; i < trees.size(); i++){
-            trees.get(i).printTree(trees.get(i).root);
+        for(DecisionTreeRegressor tree: trees){
+            tree.printTreeBreadthFirst();
         }
     }
 }
