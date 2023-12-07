@@ -1,4 +1,4 @@
-//the entire class wiil be set to public and will change in the future
+//the User class is for user's input data
 public class User{
     private double weight;
     private double waist;
@@ -14,17 +14,15 @@ public class User{
     }
 
     //setter methods
-    public void setWeight(double we){
+    private void setWeight(double we){
         this.weight = we;
     };
-    public void setWaist(double wa){
+    private void setWaist(double wa){
         this.waist = wa;
     };
-    public void setPulse(int pl){
+    private void setPulse(int pl){
         this.pulse = pl;
     };
-    
-
 
     //getter methods
     public double getWeight(){
@@ -36,5 +34,4 @@ public class User{
     public double getPulse(){
         return pulse;
     };
-    
 }
