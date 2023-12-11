@@ -14,17 +14,24 @@ class DecisionTreeRegressor {
     }
 
     public void fit(List<double[]> X, List<Double> y) {
+        System.out.println("Entering fit method in DecisionTreeRegressor Class...");
         this.root = buildTree(X, y, 0);  // Start building the tree recursively
+        System.out.println("Leaving fit method in DecisionTreeRegressor Class...");
     }
 
     public double predict(double[] sample) {
+        System.out.println("Entering predict method in DecisionTreeRegressor Class...");
         if (root != null) {
-            return predictRecursive(sample, root);
+            double d = predictRecursive(sample, root);
+            System.out.println("Returned value: " + d);
+            System.out.println("Leaving predict method in DecisionTreeRegressor Class...");
+            return d;
         }
         throw new IllegalStateException("Decision tree has not been trained. Call fit() first.");
     }
 
     private TreeNode buildTree(List<double[]> X, List<Double> y, int depth) {
+        System.out.println("Entering buildTree method in DecisionTreeRegressor Class...");
         if (stoppingCriteriaMet(X, y, depth)) {
             // Create a leaf node with the mean of target values as the prediction
             TreeNode leafNode = new TreeNode();
@@ -59,6 +66,7 @@ class DecisionTreeRegressor {
         node.setLeftChild(buildTree(leftX, leftY, depth + 1));
         node.setRightChild(buildTree(rightX, rightY, depth + 1));
 
+        System.out.println("Leaving buildTree method in DecisionTreeRegressor class...");
         return node;
     }
 
@@ -87,8 +95,13 @@ class DecisionTreeRegressor {
     }
 
     private SplitResult findBestSplit(List<double[]> X, List<Double> y) {
+        System.out.println("Entering findBestSplit method in DecisionTreeRegressor Class...");
         int numFeatures = X.get(0).length;
         int dataSize = X.size();
+
+        System.out.println("Data lists and outputs before split");
+        printDoubleList(X);
+        printDouble(y);
 
         int bestFeatureIndex = -1;
         double bestSplitValue = 0.0;
@@ -138,10 +151,16 @@ class DecisionTreeRegressor {
             }
         }
 
+        System.out.println("Best split found!");
+        printDoubleList(bestRightX);
+        printDouble(bestRightY);
+        System.out.println("Leaving findBestSplit method in DecisionTreeRegressor Class...");
+
         return new SplitResult(bestFeatureIndex, bestSplitValue, bestLeftX, bestLeftY, bestRightX, bestRightY, bestVarianceReduction);
     }
 
     private double calculateVarianceReduction(List<Double> parentY, List<Double> leftY, List<Double> rightY) {
+        System.out.println("Entering calculateVarianceReduction method in DecisionTreeRegressor Class...");
         double parentVariance = calculateVariance(parentY);
         double leftVariance = calculateVariance(leftY);
         double rightVariance = calculateVariance(rightY);
@@ -152,7 +171,11 @@ class DecisionTreeRegressor {
 
         double weightedAverageVariance = (leftSize * leftVariance + rightSize * rightVariance) / parentSize;
 
-        return parentVariance - weightedAverageVariance;
+        double final_reduction = parentVariance - weightedAverageVariance;
+
+        System.out.println("Variance reduction = " + final_reduction);
+        System.out.println("Leaving calculateVarianceReduction method in DecisionTreeRegressor Class...");
+        return final_reduction;
     }
 
 
@@ -173,6 +196,8 @@ class DecisionTreeRegressor {
     }
 
     private double calculateVariance(List<Double> values) {
+        System.out.println("Entering calculateVariance method in DecisionTreeRegressor Class...");
+
         int size = values.size();
 
         if (size == 0) {
@@ -189,6 +214,8 @@ class DecisionTreeRegressor {
         // Calculate the variance
         double variance = sumSquaredDifferences / size;
 
+        System.out.println("Variance = " + variance);
+        System.out.println("Leaving calculateVariance method in DecisionTreeRegressor Class...");
         return variance;
     }
 
@@ -219,6 +246,25 @@ class DecisionTreeRegressor {
             }
             System.out.println(); // Move to the next level in the output
         }
+    }
+
+    private void printDoubleList(List<double[]> X){
+        System.out.println("Printing double[] list:");
+        for(double[] x: X){
+            for(int i = 0; i < x.length; i++){
+                System.out.print(x[i] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    private void printDouble(List<Double> y){
+        System.out.println("Printing double list:");
+        for(Double d: y){
+            System.out.print(d + " ");
+        }
+        System.out.println();
     }
 
     private static class DataPoint implements Comparable<DataPoint> {
