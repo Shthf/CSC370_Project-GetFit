@@ -12,6 +12,7 @@ public class Planner{
     public int prediction_Situps;
     public int prediction_Jumps;
     public int[][] fitnessPlan= new int[30][3];
+    public int currentDay=0;
     
     public User thisUser;
 
