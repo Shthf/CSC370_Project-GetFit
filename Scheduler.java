@@ -94,6 +94,7 @@ public class Scheduler extends Planner{
 	        // Adding Panels to Frame
 	        add(northPanel, BorderLayout.NORTH);
 	        add(centerPanel, BorderLayout.CENTER);
+	        this.validate();
 	    }
 	    
 	    private void intake(double in, User u, Label di){
