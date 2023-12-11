@@ -28,6 +28,11 @@ public class Planner{
         prediction_Chinups = diagnosticSystem.getPrediction_chinups();
         prediction_Situps = diagnosticSystem.getPrediction_Situps();
         prediction_Jumps = diagnosticSystem.getPrediction_Jumps();
+	System.out.println();
+	System.out.println("Predicted Chinups: " + prediction_Chinups);
+	System.out.println("Predicted Situps: " + prediction_Situps);
+	System.out.println("Predicted Jumps: " + prediction_Jumps);
+	System.out.println();
         System.out.println("Initiate set goals.");
         this.setGoals();
         System.out.println("Goals set.");
