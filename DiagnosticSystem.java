@@ -90,7 +90,7 @@ public class DiagnosticSystem {
             List<Double> y_valid = new ArrayList<>();
 
             for (int i = 0; i < X.size(); i++) {
-                if (i >= startIdx && i < endIdx) {
+                if (i >= startIdx && i <= endIdx) {
                     X_valid.add(X.get(i));
                     y_valid.add(y.get(i));
                 } else {
