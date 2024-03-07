@@ -4,7 +4,7 @@
 
 Introduction
 
-	Starting a fitness regime is a difficult task for anyone. Knowing what goals to set and how to accomplish them takes time and effort, and may result in a plan that isn’t effective for everyone. This app aims to help anybody create an achievable fitness goal and workout plan specific to them. Through the use of AI, a user will be able to find a goal and plan that matches their current level of physical fitness and body type, whether they’re a beginner or experienced. To allow anybody to find a way to improve themselves physically no matter their starting point, this app will create attainable habits and improve the health of its users.
+Starting a fitness regime is a difficult task for anyone. Knowing what goals to set and how to accomplish them takes time and effort, and may result in a plan that isn’t effective for everyone. This app aims to help anybody create an achievable fitness goal and workout plan specific to them. Through the use of AI, a user will be able to find a goal and plan that matches their current level of physical fitness and body type, whether they’re a beginner or experienced. To allow anybody to find a way to improve themselves physically no matter their starting point, this app will create attainable habits and improve the health of its users.
 
 Glossary
 
@@ -113,7 +113,7 @@ Sequence Diagrams
 **Testing Plan**
 
 
-	For testing purposes an array of nodes with User_Height, User_Weight, User_HR, User_Max_CU, User_Max_SU, and User_Max_JJ set from -200 to 200. 
+For testing purposes an array of nodes with User_Height, User_Weight, User_HR, User_Max_CU, User_Max_SU, and User_Max_JJ set from -200 to 200. 
 
 Unit Testing: For the TreeNode class and RandomForestReg class input data from the training set will be limited to positive integer values with a maximum for each variable depending on it’s specific attribute. The upper boundaries for those variables will be based on the maximum data for each category.
 
